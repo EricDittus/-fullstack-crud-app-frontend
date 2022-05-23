@@ -18,7 +18,7 @@ export const fetchAllInstructorsThunk = () => async (dispatch) => {
 
 //Single instructor
 export const fetchInstructorThunk = (id) => async (dispatch) => {
-  // thunk creator would not an be async function 
+  // thunk creator would not an be async function
   // if using Promise.then:
   // return axios
   //   .get(`${path}/api/instructors/${id}`)
@@ -48,6 +48,17 @@ export const addCourseThunk = (course) => async (dispatch) => {
   try {
     let res = await axios.post(`${path}/courses`, course);
     dispatch(ac.addCourse(res.data));
+    return res.data;
+  } catch(err) {
+    console.error(err);
+  }
+};
+
+export const addInstructorThunk = (instructor) => async (dispatch) => {
+  // course = { title: "CSCI 127" }
+  try {
+    let res = await axios.post(`${path}/instructors`, instructor);
+    dispatch(ac.addInstructor(res.data));
     return res.data;
   } catch(err) {
     console.error(err);
